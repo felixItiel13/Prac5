@@ -27,7 +27,7 @@ class HomeViewModel(
 
     fun changeName(name: String) {
         state = state.copy(
-            productName = name
+            pointName = name
         )
     }
 
@@ -45,8 +45,8 @@ class HomeViewModel(
 
     fun editProduct(touristicPoint: TouristicPoint) {
         state = state.copy(
-            productName = touristicPoint.name,
-            productPrice = touristicPoint.price.toString(),
+            pointName = touristicPoint.name,
+            productPrice = touristicPoint.price,
             productId = touristicPoint.id
         )
     }
@@ -54,15 +54,15 @@ class HomeViewModel(
     fun createProduct() {
         val touristicPoint =
             TouristicPoint(
-                state.productId ?: UUID.randomUUID().toString(),
-                state.productName,
+                (state.productId ?: UUID.randomUUID()) as Int,
+                state.pointName,
                 state.productPrice.toDouble()
             )
         viewModelScope.launch {
             dao.insertProduct(touristicPoint)
         }
         state = state.copy(
-            productName = "",
+            pointName = "",
             productPrice = "",
             productId = null
         )

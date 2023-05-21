@@ -8,7 +8,7 @@ interface TouristicPointDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertProduct(touristicPoint: TouristicPoint)
 
-    @Query("SELECT * FROM product")
+    @Query("SELECT * FROM touristic_point")
     fun getAllProducts(): Flow<List<TouristicPoint>>
 
     @Delete

@@ -10,7 +10,11 @@ import androidx.compose.material.Surface
 import androidx.compose.ui.Modifier
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
+import com.mkiperszmid.emptyapp.home.AddTouristicPointScreen
 import com.mkiperszmid.emptyapp.home.HomeScreen
 import com.mkiperszmid.emptyapp.home.HomeViewModel
 import com.mkiperszmid.emptyapp.home.ProductDatabase
@@ -36,7 +40,15 @@ class MainActivity : ComponentActivity() {
                             }
                         }
                     })
-                    HomeScreen(viewModel)
+                    val navController = rememberNavController()
+                    NavHost(navController = navController, startDestination = "home"){
+                        composable("home"){
+                            HomeScreen(viewModel = viewModel, navController = navController)
+                        }
+                        composable("test"){
+                            AddTouristicPointScreen(viewModel = viewModel, navController)
+                        }
+                    }
                 }
             }
         }
