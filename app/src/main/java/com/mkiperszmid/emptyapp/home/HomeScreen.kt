@@ -37,7 +37,7 @@ fun HomeScreen(
             placeholder = { Text(text = "Nombre del producto") }
         )
         TextField(
-            value = state.productPrice,
+            value = state.pointPrice,
             onValueChange = { viewModel.changePrice(it) },
             placeholder = { Text(text = "Precio") }
         )

@@ -3,6 +3,8 @@ package com.mkiperszmid.emptyapp.home
 data class HomeState(
     val touristicPoints: List<TouristicPoint> = emptyList(),
     val pointName: String = "",
-    val productPrice: Double? = null,
-    val productId: Int? = null
+    val pointPrice: Double? = 0.0,
+    val pointId: Int? = 0,
+    val country: String = "",
+    val city: String = "",
 )

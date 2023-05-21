@@ -24,18 +24,34 @@ class HomeViewModel(
             }
         }
     }
-
+    fun changeId(id: Int) {
+        state = state.copy(
+            pointId= id
+        )
+    }
     fun changeName(name: String) {
         state = state.copy(
             pointName = name
         )
     }
 
-    fun changePrice(price: String) {
+    fun changePrice(price: Double) {
         state = state.copy(
-            productPrice = price
+            pointPrice = price
         )
     }
+    fun changeCountry(country: String) {
+        state = state.copy(
+            country = country
+        )
+    }
+
+    fun changeCity(city: String) {
+        state = state.copy(
+            city = city
+        )
+    }
+
 
     fun deleteProduct(touristicPoint: TouristicPoint) {
         viewModelScope.launch {
@@ -46,25 +62,32 @@ class HomeViewModel(
     fun editProduct(touristicPoint: TouristicPoint) {
         state = state.copy(
             pointName = touristicPoint.name,
-            productPrice = touristicPoint.price,
-            productId = touristicPoint.id
+            pointPrice = touristicPoint.price,
+            pointId = touristicPoint.id
         )
     }
 
     fun createProduct() {
         val touristicPoint =
             TouristicPoint(
-                (state.productId ?: UUID.randomUUID()) as Int,
+                state.pointId!!,
                 state.pointName,
-                state.productPrice.toDouble()
+                state.country,
+                state.city,
+                state.pointPrice!!.toDouble()
             )
         viewModelScope.launch {
             dao.insertProduct(touristicPoint)
         }
+        cleanState()
+    }
+    fun cleanState(){
         state = state.copy(
             pointName = "",
-            productPrice = "",
-            productId = null
+            city = "",
+            country = "",
+            pointPrice =0.0,
+            pointId = 0
         )
     }
 }
