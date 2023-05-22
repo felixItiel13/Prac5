@@ -4,26 +4,24 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.mkiperszmid.emptyapp.entities.TouristicPoint
-import com.mkiperszmid.emptyapp.viewModels.TouristicPointViewModel
+import com.mkiperszmid.emptyapp.entities.Country
+import com.mkiperszmid.emptyapp.viewModels.CountryViewModel
+
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProductItem(
-    touristicPoint: TouristicPoint,
-    touristicPointViewModel: TouristicPointViewModel,
-    onEdit: () -> Unit,
+fun CountryItem(
+    country: Country,
+    countryViewModel: CountryViewModel,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: () ->Unit,
     navController: NavController
 ) {
 
@@ -34,14 +32,13 @@ fun ProductItem(
     ) {
         Card(elevation = 10.dp, onClick = {
 
-            touristicPointViewModel.changeName(touristicPoint.name)
-            touristicPointViewModel.changeCountry(touristicPoint.countryCode)
-            touristicPointViewModel.changeCity(touristicPoint.city)
-            touristicPointViewModel.changePrice(touristicPoint.price.toString())
-            touristicPointViewModel.changeLatitude(touristicPoint.latitude.toString())
-            touristicPointViewModel.changeLongitude(touristicPoint.longitude.toString())
-
-            navController.navigate("touristicPointDetails")
+            countryViewModel.changeName(country.name)
+            countryViewModel.changeRegion(country.region)
+            countryViewModel.changeContinent(country.continent)
+            countryViewModel.changeLifeExpectancy(country.lifeExpectancy.toString())
+            countryViewModel.changeGovernmentForm(country.governmentForm)
+            countryViewModel.changeCode(country.code)
+            navController.navigate("countryDetails")
         }) {
             Row(
                 modifier = modifier
@@ -53,28 +50,28 @@ fun ProductItem(
                 Column {
                     Row() {
                         Column(Modifier.padding(top = 10.dp, bottom = 0.dp)) {
-                            Text(text = "Point name", color = Color.LightGray, fontSize = 10.sp)
-                            Text(touristicPoint.name, fontSize = 20.sp)
+                            Text(text = "Country name", color = Color.LightGray, fontSize = 10.sp)
+                            Text(country.name, fontSize = 18.sp)
                         }
                     }
                     Row {
-                        Column(Modifier.padding(top = 5.dp, bottom = 0.dp, end= 30.dp)) {
+                        Column(Modifier.padding(top = 5.dp, bottom = 0.dp, end= 30.dp).width(90.dp)) {
                             Text(
-                                text = "Price",
+                                text = "Region",
                                 color = Color.LightGray,
                                 fontSize = 10.sp
                             )
-                            Text("$ ${touristicPoint.price}", fontSize = 20.sp)
+                            Text(country.region, fontSize = 18.sp)
                         }
-                        Column(Modifier.padding(top = 5.dp, bottom = 10.dp)) {
+                        Column(Modifier.padding(top = 5.dp, bottom = 10.dp).width(100.dp)) {
                             Text(
-                                text = "City",
-                                color = androidx.compose.ui.graphics.Color.LightGray,
+                                text = "Government Form",
+                                color = Color.LightGray,
                                 fontSize = 10.sp
                             )
                             Text(
-                                "${touristicPoint.city}",
-                                fontSize = 20.sp
+                                country.governmentForm,
+                                fontSize = 18.sp
                             )
                         }
                     }
@@ -93,5 +90,3 @@ fun ProductItem(
         }
     }
 }
-
-

@@ -4,26 +4,23 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Delete
-import androidx.compose.material.icons.filled.Edit
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
-import com.mkiperszmid.emptyapp.entities.TouristicPoint
-import com.mkiperszmid.emptyapp.viewModels.TouristicPointViewModel
+import com.mkiperszmid.emptyapp.entities.City
+import com.mkiperszmid.emptyapp.viewModels.CityViewModel
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun ProductItem(
-    touristicPoint: TouristicPoint,
-    touristicPointViewModel: TouristicPointViewModel,
-    onEdit: () -> Unit,
+fun CityItem(
+    city: City,
+    cityViewModel: CityViewModel,
     onDelete: () -> Unit,
     modifier: Modifier = Modifier,
-    onClick: () ->Unit,
     navController: NavController
 ) {
 
@@ -34,14 +31,10 @@ fun ProductItem(
     ) {
         Card(elevation = 10.dp, onClick = {
 
-            touristicPointViewModel.changeName(touristicPoint.name)
-            touristicPointViewModel.changeCountry(touristicPoint.countryCode)
-            touristicPointViewModel.changeCity(touristicPoint.city)
-            touristicPointViewModel.changePrice(touristicPoint.price.toString())
-            touristicPointViewModel.changeLatitude(touristicPoint.latitude.toString())
-            touristicPointViewModel.changeLongitude(touristicPoint.longitude.toString())
-
-            navController.navigate("touristicPointDetails")
+            cityViewModel.changeName(city.name)
+            cityViewModel.changeCountryCode(city.countryCode)
+            cityViewModel.changePopulation(city.population.toString())
+            navController.navigate("cityDetails")
         }) {
             Row(
                 modifier = modifier
@@ -53,27 +46,27 @@ fun ProductItem(
                 Column {
                     Row() {
                         Column(Modifier.padding(top = 10.dp, bottom = 0.dp)) {
-                            Text(text = "Point name", color = Color.LightGray, fontSize = 10.sp)
-                            Text(touristicPoint.name, fontSize = 20.sp)
+                            Text(text = "City name", color = Color.LightGray, fontSize = 10.sp)
+                            Text(city.name, fontSize = 20.sp)
                         }
                     }
                     Row {
                         Column(Modifier.padding(top = 5.dp, bottom = 0.dp, end= 30.dp)) {
                             Text(
-                                text = "Price",
+                                text = "Country Code",
                                 color = Color.LightGray,
                                 fontSize = 10.sp
                             )
-                            Text("$ ${touristicPoint.price}", fontSize = 20.sp)
+                            Text(city.countryCode, fontSize = 20.sp)
                         }
                         Column(Modifier.padding(top = 5.dp, bottom = 10.dp)) {
                             Text(
-                                text = "City",
-                                color = androidx.compose.ui.graphics.Color.LightGray,
+                                text = "Population",
+                                color = Color.LightGray,
                                 fontSize = 10.sp
                             )
                             Text(
-                                "${touristicPoint.city}",
+                                city.population.toString(),
                                 fontSize = 20.sp
                             )
                         }
@@ -93,5 +86,3 @@ fun ProductItem(
         }
     }
 }
-
-
