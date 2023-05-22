@@ -107,11 +107,6 @@ fun FilterScreen(filterViewModel: FilterViewModel, cityViewModel: CityViewModel,
                     singleLine = true
                 )
             }
-            Text(state.city)
-            Text(state.country)
-            Text(state.minPrice)
-            Text(state.maxPrice)
-            Text(filterViewModel.isActive().toString())
             Row(horizontalArrangement = Arrangement.spacedBy(20.dp)) {
                 Button(onClick = { navController.navigate("home");   }) {
                     Text("Go Back")

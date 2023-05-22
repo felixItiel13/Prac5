@@ -21,7 +21,8 @@ class TouristicPointViewModel(
         viewModelScope.launch {
             dao.getAllProducts().collectLatest {
                 state = state.copy(
-                    touristicPoints = it
+                    touristicPoints = it,
+                    safeTouristicPoints = it
                 )
             }
         }
@@ -91,7 +92,7 @@ class TouristicPointViewModel(
     fun createProduct() {
         val touristicPoint =
             TouristicPoint(
-                state.pointId!!.toInt(),
+                null,
                 state.pointName,
                 state.country,
                 state.city,
@@ -110,12 +111,19 @@ class TouristicPointViewModel(
             city = "",
             country = "",
             pointPrice ="",
-            pointId = ""
+            pointId = "-",
+            latitude = "",
+            longitude = ""
         )
     }
 
     fun activeFilter(countryCode: String, city:String, minPrice:String, maxPrice:String){
+
+        state = state.copy(
+            touristicPoints = state.safeTouristicPoints
+        )
         val list = state.touristicPoints
+
         var filteredList = list
         if(countryCode!= ""){
             filteredList = filteredList.filter{ point-> point.countryCode == countryCode }
@@ -141,6 +149,6 @@ class TouristicPointViewModel(
         }
     }
     fun isEmptySpace():Boolean{
-        return state.pointId=="" || state.city=="" || state.pointName =="" || state.country =="" || state.pointPrice ==""
+        return state.city=="" || state.pointName =="" || state.country =="" || state.pointPrice ==""
     }
 }

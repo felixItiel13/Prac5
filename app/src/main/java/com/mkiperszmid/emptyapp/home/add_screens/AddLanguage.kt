@@ -68,7 +68,7 @@ fun AddLanguage(viewModel: LanguageViewModel, countryViewModel:CountryViewModel,
                 onCheckedChange = { checkedState= it ; viewModel.changeIsOfficial(checkedState.toString())}
             )
             Row(){
-                Button(onClick = { navController.navigate("countryScreen"); viewModel.cleanState()}){
+                Button(onClick = { navController.navigate("languageScreen"); viewModel.cleanState()}){
                     Text("Go back")
                 }
                 Button(onClick = {viewModel.createLanguage(); viewModel.cleanState()}){

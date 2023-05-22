@@ -55,8 +55,8 @@ fun AddTouristicPointScreen(viewModel: TouristicPointViewModel, countryViewModel
     Box(Modifier.fillMaxSize(),contentAlignment = Alignment.Center){
         Column(Modifier.padding(top = 20.dp), verticalArrangement = Arrangement.spacedBy(20.dp)){
             Text("Create Touristic Point", fontSize = 30.sp, fontWeight = FontWeight.Bold)
-            TextField(value = viewModel.state.pointId.toString(), onValueChange = {viewModel.changeId(it)}, placeholder = {Text("Id")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                singleLine = true)
+            /*TextField(value = viewModel.state.pointId.toString(), onValueChange = {viewModel.changeId(it)}, placeholder = {Text("Id")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                singleLine = true)*/
             TextField(value = viewModel.state.pointName, onValueChange = {viewModel.changeName(it)}, placeholder = {Text("Name")},
                 singleLine = true)
             TextField(value = viewModel.state.pointPrice, onValueChange = {viewModel.changePrice(it)}, placeholder = {Text("Price")}, keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
@@ -115,7 +115,7 @@ fun AddTouristicPointScreen(viewModel: TouristicPointViewModel, countryViewModel
                 Button(onClick = { navController.navigate("home"); viewModel.cleanState()}){
                     Text("Go back")
                 }
-                Button(onClick = {viewModel.createProduct(); viewModel.cleanState()}, enabled = ((state.country!="-" && state.city!="-") && !viewModel.isEmptySpace())){
+                Button(onClick = {viewModel.createProduct(); viewModel.cleanState(); selectedCity ="-"; selectedCountry ="-"}, enabled = ((state.country!="-" && state.city!="-") && !viewModel.isEmptySpace())){
                     Text("Save")
                 }
             }

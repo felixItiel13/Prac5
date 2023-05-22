@@ -15,7 +15,7 @@ import androidx.room.PrimaryKey
 )
 data class TouristicPoint(
     @PrimaryKey(autoGenerate = false)
-    val id: Int,
+    val id: Int?,
     val name: String,
     val countryCode: String,
     val city:String,
