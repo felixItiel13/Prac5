@@ -123,7 +123,7 @@ fun HomeScreen(
         FloatingActionButton(
             modifier = Modifier
                 .padding(all = 20.dp)
-                .padding(end = 160.dp, bottom = 9.dp)
+                .padding(end = 140.dp, bottom = 9.dp)
                 .size(50.dp)
                 .align(alignment = Alignment.BottomEnd),
             onClick = {
